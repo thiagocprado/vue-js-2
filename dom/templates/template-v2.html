@@ -1,0 +1,24 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app">
+  <p>{{ titulo }}</p>
+  <p>{{ saudacao() }}</p>
+  <!-- dentro do padrão double-mustache o retorno tem que ser uma string -->
+</div>
+
+<script>
+  new Vue({
+    // temos acesso direto ao template
+    el: "#app",
+    data: {
+      titulo: "Usando VueJS!",
+    },
+    methods: {
+      saudacao: function () {
+        return "Boa semana";
+        // return 1.2;
+        // return Math.pow;
+      },
+    },
+  });
+</script>

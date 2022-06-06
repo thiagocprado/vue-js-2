@@ -1,0 +1,31 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app">
+  <p>{{ titulo }}</p>
+  <p c3r-bind="abc">{{ saudacao() }}</p> <!-- dentro do padrão double-mustache o retorno tem que ser uma string -->
+  <a v-bind:href="link">Google</a>  <!-- diretiva - propriedade personalizada não nativa do html -->
+</div>
+
+<!-- v-bind - faz a ligação entre a vue instance e o atributo da tag no template  -->
+
+<script>
+  new Vue({
+    // temos acesso direto ao template
+    el: "#app",
+    data: {
+      titulo: "Usando VueJS!",
+      link: "http://google.com"
+    },
+    methods: {
+      // métodos e data não podem ter o mesmo nome
+      saudacao: function () {
+        console.log(this); // o this é a instância do Vue
+        return this.titulo; // faz um proxy
+      },
+    },
+  });
+</script>
+
+
+<!-- document.querySelector('[c3r-bind]') -->
+<!-- document.querySelector('[c3r-bind]').getAttribute() -->

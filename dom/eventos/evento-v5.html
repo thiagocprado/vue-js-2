@@ -1,0 +1,49 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app">
+  <p>{{ contador }}</p>
+  <button v-on:click="somar(5)">Somar 1</button>
+  <!-- palavra reserveda event é utilizada para pegar os eventos / o dólar é usado para algumas palavras reservadas -->
+  <p v-on:mousemove="atualizarXY(5, $event)">
+    Mouse: {{x}} e {{y}}
+    <span v-on:mousemove="parar">PARAR AQUI!!!</span>
+  </p>
+  <a v-on:click.prevent="naoNavegarConsole" href="http://google.com">Google</a>
+  <input type="text" v-on:keyup="exibirAlerta" />
+  <!-- podemos encadear teclas para só exibir quando houver combinação de teclas -->
+  <input type="text" v-on:keyup.enter.alt="exibirAlerta" />
+</div>
+
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      contador: 0,
+      x: 0,
+      y: 0,
+    },
+    methods: {
+      // se passarmos um parâmetro "personalizado" ele para de pegar o evento
+      somar(numero) {
+        // por padrão o evento é sempre passado como parâmetro
+        console.log(event);
+        this.contador = this.contador + numero;
+      },
+      atualizarXY(numero, event) {
+        this.contador = this.contador + numero;
+        this.x = event.clientX;
+        this.y = event.clientY;
+        console.log(event);
+      },
+      parar(event) {
+        event.stopPropagation();
+      },
+      naoNavegarConsole() {
+        console.log("Não navega");
+      },
+      exibirAlerta() {
+        alert("Exibir alerta");
+      },
+    },
+  });
+</script>

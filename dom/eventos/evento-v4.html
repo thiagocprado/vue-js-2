@@ -1,0 +1,54 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app">
+  <p>{{ contador }}</p>
+  <button v-on:click="somar(5)">Somar 1</button>
+  <!-- palavra reserveda event é utilizada para pegar os eventos / o dólar é usado para algumas palavras reservadas -->
+  <p v-on:mousemove="atualizarXY(5, $event)">
+    Mouse: {{x}} e {{y}}
+    <span v-on:mousemove="parar">PARAR AQUI!!!</span>
+    <!-- parar propagação -->
+    <span v-on:mousemove.stop="">PARAR AQUI!!!</span>
+
+    <!-- parar propagação e previnir -->
+    <span v-on:mousemove.stop.prevent="">PARAR AQUI!!!</span>
+  </p>
+  <!-- prevenir o efeito default -->
+  <a v-on:click.prevent href="http://google.com">Google</a>
+  <a v-on:click="naoNavegar" href="http://google.com">Google</a>
+  <a v-on:click.prevent="naoNavegarConsole" href="http://google.com">Google</a>
+</div>
+
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      contador: 0,
+      x: 0,
+      y: 0,
+    },
+    methods: {
+      // se passarmos um parâmetro "personalizado" ele para de pegar o evento
+      somar(numero) {
+        // por padrão o evento é sempre passado como parâmetro
+        console.log(event);
+        this.contador = this.contador + numero;
+      },
+      atualizarXY(numero, event) {
+        this.contador = this.contador + numero;
+        this.x = event.clientX;
+        this.y = event.clientY;
+        console.log(event);
+      },
+      parar(event) {
+        event.stopPropagation();
+      },
+      naoNavegar() {
+        event.preventDefault();
+      },
+      naoNavegarConsole() {
+        console.log("Não navega");
+      },
+    },
+  });
+</script>

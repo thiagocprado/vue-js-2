@@ -1,0 +1,22 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app">
+  <input type="text" v-on:input="alterarTitulo" /> <!-- Diretivo -->
+  <p>{{ titulo }}</p>
+</div>
+
+<script>
+  new Vue({
+    el: "#app", // elemento - é preciso referenciar com o nome da classe ou o id
+    data: {
+      // valores dos atributos
+      titulo: "Usando VueJS!",
+    },
+    methods: {
+      // métodos a serem executados baseados em ações
+      alterarTitulo(event) {
+        this.titulo = event.target.value; // o this não funcionaria por padrão no js
+      },
+    },
+  });
+</script>
