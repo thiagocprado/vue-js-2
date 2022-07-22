@@ -1,0 +1,26 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app">
+  <!-- expressões de uma linha podem ser adicionadas no double mustache -->
+  <!-- algumas expressões como for, if else não funcionarão -->
+  <p>{{ contador }}</p>
+  <p>{{ contador > 10 ? "Maior que 10" : "Menor que 10" }}</p>
+  <button v-on:click="somar(5)">Somar 1</button>
+  <!-- palavra reserveda event é utilizada para pegar os eventos / o dólar é usado para algumas palavras reservadas -->
+</div>
+
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      contador: 0,
+    },
+    methods: {
+      // se passarmos um parâmetro "personalizado" ele para de pegar o evento
+      somar() {
+        // por padrão o evento é sempre passado como parâmetro
+        this.contador++;
+      },
+    },
+  });
+</script>
